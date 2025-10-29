@@ -1,0 +1,66 @@
+<!-- pages/supportBoardDetail.html -->
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PREAM | 문의사항 상세</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- 공통 CSS -->
+  <link rel="stylesheet" href="/frontend/dist/style.css" />
+
+  <!-- 아이콘 & 네비 -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="/frontend/js/navigation.js" defer></script>
+
+  <!-- 페이지 스크립트 (ESM) -->
+  <script type="module" src="/frontend/js/supportBoard/supportBoardDetail.js"></script>
+</head>
+<body class="bg-white text-slate-800">
+  <!-- 공통 네비게이션 -->
+  <div id="navigation" data-src="../components/navigation.html"></div>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+    <!-- 상단 타이틀 + 수평선 -->
+    <h1 class="text-3xl font-bold text-center">문의사항</h1>
+    <div class="border-b-2 border-gray-400 mt-6"></div>
+
+    <!-- 메타 영역: 제목/작성시간 -->
+    <section id="meta" class="py-3 border-b border-slate-200">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <p class="text-sm sm:text-base">
+          <span class="text-slate-500">글 제목 :</span>
+          <span id="post-title" class="font-medium text-slate-900 align-middle">로딩 중…</span>
+        </p>
+        <p class="text-xs sm:text-sm text-slate-500">
+          <span class="text-slate-500">작성 시간 :</span>
+          <time id="post-date">—</time>
+        </p>
+      </div>
+    </section>
+
+    <!-- 본문 내용 -->
+    <article id="post-content" class="max-w-none whitespace-pre-wrap py-5">
+      로딩 중…
+    </article>
+
+    <!-- 작성자/관리자만 보이는 액션 버튼 -->
+    <div id="owner-actions" class="hidden mt-4 flex gap-2">
+      <button id="btn-edit" class="px-3 py-1.5 text-sm rounded border border-slate-300 hover:bg-slate-50">
+        수정
+      </button>
+      <button id="btn-delete" class="px-3 py-1.5 text-sm rounded border border-rose-300 text-rose-600 hover:bg-rose-50">
+        삭제
+      </button>
+    </div>
+
+    <!-- 에러/알림 -->
+    <p id="status-msg" class="mt-6 text-sm text-rose-600 hidden"></p>
+    <p id="hint-msg" class="mt-2 text-xs text-slate-400 hidden">(데모 데이터가 표시되고 있습니다)</p>
+  </main>
+
+</body>
+</html>

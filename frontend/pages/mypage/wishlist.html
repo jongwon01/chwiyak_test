@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>명품 거래 - 위시리스트</title>
+  <link rel="stylesheet" href="../../dist/style2.css" />
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-900">
+  <!-- Navigation Component Placeholder -->
+  <div id="navigation" data-src="../components/navigation.html"></div>
+
+  <!-- 헤더 -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-10">
+    <div class="container mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
+      <button onclick="goBack()" class="text-2xl text-gray-700 hover:text-gray-900">
+        ←
+      </button>
+      <h1 class="text-lg font-semibold">위시리스트</h1>
+      <button onclick="goHome()" class="text-2xl text-gray-700 hover:text-gray-900">
+        ⌂
+      </button>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-6 max-w-6xl">
+    
+    <!-- 필터 및 정렬 -->
+    <section class="flex justify-between items-center mb-6">
+      <p class="text-sm text-gray-600">총 <span class="font-semibold text-gray-900">3</span>개</p>
+      <select class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-gray-900">
+        <option value="recent">최근 추가순</option>
+        <option value="price-high">가격 높은순</option>
+        <option value="price-low">가격 낮은순</option>
+        <option value="name">상품명순</option>
+      </select>
+    </section>
+
+    <!-- 위시리스트 그리드 -->
+    <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="wishlist-grid">
+      
+      <!-- 위시리스트 아이템 1 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden wishlist-item" data-id="1">
+        <div class="relative">
+          <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=400&fit=crop" alt="CHANEL 클래식 플랩백" class="w-full h-64 object-cover" />
+        </div>
+        <div class="p-4">
+          <div class="flex items-center justify-between mb-1">
+            <p class="font-semibold truncate flex-1">CHANEL 클래식 플랩백</p>
+            <button onclick="toggleWishlist(1)" class="wishlist-heart ml-2 flex-shrink-0">
+              <span class="text-red-500 text-xl">♥</span>
+            </button>
+          </div>
+          <p class="text-sm text-gray-600 mb-2">블랙 / 미디엄</p>
+          <p class="text-lg font-bold">₩8,500,000</p>
+          <button onclick="goToProduct(1)" class="w-full mt-4 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm">
+            상품 보기
+          </button>
+        </div>
+      </div>
+
+      <!-- 위시리스트 아이템 2 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden wishlist-item" data-id="2">
+        <div class="relative">
+          <img src="https://images.unsplash.com/photo-1591561954555-607968c989ab?w=400&h=400&fit=crop" alt="LOUIS VUITTON 네버풀" class="w-full h-64 object-cover" />
+        </div>
+        <div class="p-4">
+          <div class="flex items-center justify-between mb-1">
+            <p class="font-semibold truncate flex-1">LOUIS VUITTON 네버풀</p>
+            <button onclick="toggleWishlist(2)" class="wishlist-heart ml-2 flex-shrink-0">
+              <span class="text-red-500 text-xl">♥</span>
+            </button>
+          </div>
+          <p class="text-sm text-gray-600 mb-2">모노그램 / MM</p>
+          <p class="text-lg font-bold">₩2,100,000</p>
+          <button onclick="goToProduct(2)" class="w-full mt-4 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm">
+            상품 보기
+          </button>
+        </div>
+      </div>
+
+      <!-- 위시리스트 아이템 3 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden wishlist-item" data-id="3">
+        <div class="relative">
+          <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=400&fit=crop" alt="HERMES 버킨 백" class="w-full h-64 object-cover" />
+        </div>
+        <div class="p-4">
+          <div class="flex items-center justify-between mb-1">
+            <p class="font-semibold truncate flex-1">HERMES 버킨 백</p>
+            <button onclick="toggleWishlist(3)" class="wishlist-heart ml-2 flex-shrink-0">
+              <span class="text-red-500 text-xl">♥</span>
+            </button>
+          </div>
+          <p class="text-sm text-gray-600 mb-2">토고 / 30cm</p>
+          <p class="text-lg font-bold">₩15,000,000</p>
+          <button onclick="goToProduct(3)" class="w-full mt-4 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm">
+            상품 보기
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 빈 상태 (위시리스트가 비었을 때) -->
+    <section class="empty-state bg-white rounded-lg shadow p-12 text-center hidden" id="empty-state">
+      <p class="text-gray-500 mb-6">위시리스트가 비어있습니다.</p>
+      <button onclick="goShopping()" class="px-6 py-2.5 border-2 border-gray-900 rounded-full hover:bg-gray-900 hover:text-white transition font-medium">
+        SHOP 바로가기
+      </button>
+    </section>
+
+  </main>
+
+  <script src="../../js/mypage/wishlist.js"></script>
+</body>
+</html>

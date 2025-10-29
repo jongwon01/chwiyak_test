@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PREAM 관리자 페이지</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    />
+  </head>
+
+  <body class="bg-white min-h-screen font-sans flex">
+    <!-- 사이드바 -->
+    <aside class="w-64 bg-gray-800 text-white flex flex-col">
+      <div class="px-6 py-4 text-2xl font-bold border-b border-gray-700">
+        PREAM Admin
+      </div>
+
+      <nav class="flex-1 px-4 py-6 space-y-3">
+        <button
+          class="tab-btn w-full text-left px-4 py-2 rounded-md hover:bg-gray-700"
+          data-target="user"
+        >
+          <i class="fa-solid fa-users mr-3"></i>
+          사용자 관리
+        </button>
+        <button
+          class="tab-btn w-full text-left px-4 py-2 rounded-md hover:bg-gray-700"
+          data-target="inquiry"
+        >
+          <i class="fa-solid fa-pen-to-square mr-3"></i>
+          문의사항 관리
+        </button>
+        <button
+          class="tab-btn w-full text-left px-4 py-2 rounded-md hover:bg-gray-700"
+          data-target="notice"
+        >
+          <i class="fa-solid fa-bell mr-3"></i>
+          공지사항 관리
+        </button>
+        <button
+          class="tab-btn w-full text-left px-4 py-2 rounded-md hover:bg-gray-700"
+          data-target="faq"
+        >
+          <i class="fa-solid fa-circle-question mr-3"></i>
+          FAQ 관리
+        </button>
+      </nav>
+
+      <div
+        class="border-t border-gray-700 p-4 text-sm flex items-center justify-between"
+      >
+        <span id="admin-name">admin님</span>
+        <button
+          id="logout-btn"
+          class="px-3 py-1 bg-gray-700 rounded hover:bg-gray-600"
+        >
+          로그아웃
+        </button>
+      </div>
+    </aside>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="flex-1 p-8 overflow-y-auto">
+      <!-- 사용자 관리 -->
+      <section id="tab-user" class="tab-section">
+        <h2 class="text-xl font-semibold mb-4">사용자 관리</h2>
+        <div class="overflow-y-auto border rounded-lg">
+          <table
+            class="w-full text-sm text-center border-collapse"
+            id="user-table"
+          >
+            <thead class="sticky top-0 bg-gray-100">
+              <tr>
+                <th class="py-2 px-3 border-b">번호</th>
+                <th class="py-2 px-3 border-b">이름</th>
+                <th class="py-2 px-3 border-b">이메일</th>
+                <th class="py-2 px-3 border-b">권한</th>
+                <th class="py-2 px-3 border-b">상태</th>
+                <th class="py-2 px-3 border-b">관리</th>
+              </tr>
+            </thead>
+            <tbody id="user-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 문의사항 관리 -->
+      <section id="tab-inquiry" class="tab-section hidden">
+        <h2 class="text-xl font-semibold mb-4">문의사항 관리</h2>
+        <div class="overflow-y-auto border rounded-lg">
+          <table
+            class="w-full text-sm text-center border-collapse"
+            id="inquiry-table"
+          >
+            <thead class="sticky top-0 bg-gray-100">
+              <tr>
+                <th class="py-2 px-3 border-b">번호</th>
+                <th class="py-2 px-3 border-b">제목</th>
+                <th class="py-2 px-3 border-b">작성자</th>
+                <th class="py-2 px-3 border-b">등록일</th>
+                <th class="py-2 px-3 border-b">상태</th>
+                <th class="py-2 px-3 border-b">관리</th>
+              </tr>
+            </thead>
+            <tbody id="inquiry-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 공지사항 관리 -->
+      <section id="tab-notice" class="tab-section hidden">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold">공지사항 관리</h2>
+          <a
+            href="./notice/notice_create.html"
+            class="px-4 h-10 inline-flex items-center rounded-md bg-black text-white text-sm hover:opacity-90 active:scale-[.98]"
+            >공지 작성</a
+          >
+        </div>
+        <div class="overflow-y-auto border rounded-lg">
+          <table
+            class="w-full text-sm text-center border-collapse"
+            id="notice-table"
+          >
+            <thead class="sticky top-0 bg-gray-100">
+              <tr>
+                <th class="py-2 px-3 border-b">번호</th>
+                <th class="py-2 px-3 border-b">제목</th>
+                <th class="py-2 px-3 border-b">작성자</th>
+                <th class="py-2 px-3 border-b">등록일</th>
+                <th class="py-2 px-3 border-b">관리</th>
+              </tr>
+            </thead>
+            <tbody id="notice-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- FAQ 관리 -->
+      <section id="tab-faq" class="tab-section hidden">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold">FAQ 관리</h2>
+          <button
+            id="add-faq-btn"
+            class="px-4 h-10 inline-flex items-center rounded-md bg-gray-800 text-white text-sm hover:opacity-90 active:scale-[.98]"
+          >
+            FAQ 추가
+          </button>
+        </div>
+
+        <div class="overflow-y-auto border rounded-lg">
+          <table class="w-full text-sm text-center border-collapse">
+            <thead class="sticky top-0 bg-gray-100">
+              <tr>
+                <th class="py-2 px-3 border-b">번호</th>
+                <th class="py-2 px-3 border-b">질문</th>
+                <th class="py-2 px-3 border-b">답변</th>
+                <th class="py-2 px-3 border-b">관리</th>
+              </tr>
+            </thead>
+            <tbody id="faq-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <!-- FAQ 추가/수정 모달 -->
+    <div
+      id="faq-modal"
+      class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+    >
+      <div class="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
+        <h3 id="faq-modal-title" class="text-lg font-semibold mb-4">FAQ 추가</h3>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >질문</label
+            >
+            <input
+              type="text"
+              id="faq-question"
+              class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-gray-300"
+              placeholder="질문을 입력하세요"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >답변</label
+            >
+            <textarea
+              id="faq-answer"
+              rows="4"
+              class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-gray-300"
+              placeholder="답변을 입력하세요"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end gap-3">
+          <button
+            id="faq-cancel"
+            class="px-4 py-2 rounded-md border border-gray-400 hover:bg-gray-100"
+          >
+            취소
+          </button>
+          <button
+            id="faq-save"
+            class="px-4 py-2 rounded-md bg-gray-800 text-white hover:bg-gray-700"
+          >
+            저장
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/admin.js"></script>
+  </body>
+</html>

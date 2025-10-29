@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>공지사항 상세 | PREAM</title>
+
+    <!-- 공통 CSS -->
+    <link rel="stylesheet" href="../../dist/style.css" />
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="/frontend/js/navigation.js" defer></script>
+
+    <style>
+      /* 본문 높이 및 스크롤 처리 */
+      #notice-content {
+        min-height: 50vh;
+        padding: 2rem 2.5rem; /* 본문 내부 여백 */
+        background-color: #fafafa;
+        border-radius: 12px;
+        overflow-y: auto;
+        line-height: 1.8;
+        scrollbar-width: thin;
+        scrollbar-color: #d1d5db transparent;
+      }
+
+      #notice-content::-webkit-scrollbar {
+        width: 6px;
+      }
+      #notice-content::-webkit-scrollbar-thumb {
+        background-color: #d1d5db;
+        border-radius: 3px;
+      }
+
+      /* 제목/작성자/날짜 영역 */
+      .notice-header {
+        border-bottom: 2px solid #000;
+        padding-bottom: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      /* 본문 내 strong 강조 텍스트 */
+      #notice-content strong {
+        font-weight: 600;
+        color: #111;
+      }
+
+      /* ‘목록으로 돌아가기’ 버튼 */
+      .back-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        margin-top: 2rem;
+        font-weight: 600;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: white;
+        transition: all 0.2s ease;
+      }
+      .back-btn:hover {
+        background-color: #f3f3f3;
+        border-color: #aaa;
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen bg-white text-gray-900">
+    <!-- 상단 네비게이션 -->
+    <div id="navigation" data-src="../../components/navigation.html"></div>
+
+    <!-- 본문 -->
+    <main class="max-w-5xl mx-auto px-8">
+      <div class=" px-10 py-6">
+        <div class="notice-header">
+          <h1 id="notice-title" class="text-2xl font-bold mb-3">
+            [공지] KREAM DRAW - 10월 3주차 신규회원 이벤트 안내
+          </h1>
+          <div class="flex justify-between text-sm text-gray-500">
+            <span id="notice-author">작성자: 관리자</span>
+            <span id="notice-date">등록일: 2025-10-22</span>
+          </div>
+        </div>
+
+        <!-- 본문 내용 -->
+        <div
+          id="notice-content"
+          class="text-gray-700 whitespace-pre-line"
+        >
+          안녕하세요, PREAM입니다. 👋<br>
+
+          10월 3주차 신규회원 대상 KREAM DRAW 이벤트가 진행됩니다.<br>
+          자세한 일정 및 혜택은 아래 내용을 참고해주세요.<br>
+          <br>
+          🔹 이벤트 기간: 10/23(수) ~ 10/29(화)<br>
+          🔹 대상: 신규 회원 누구나<br>
+          🔹 혜택: 추첨을 통해 다양한 한정판 아이템 제공<br>
+          <br>
+          유의사항:<br>
+          - 이벤트 참여는 PREAM 회원가입 후 가능합니다.<br>
+          - 당첨자 발표는 개별 이메일로 안내됩니다.<br>
+          <br>
+          감사합니다.
+          <br>
+        </div>
+
+        <!-- 뒤로가기 버튼 -->
+        <div class="flex justify-center">
+          <button
+            onclick="history.back()"
+            class="back-btn"
+          >
+            <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+            목록으로 돌아가기
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <script src="../js/notice_detail.js"></script>
+  </body>
+</html>

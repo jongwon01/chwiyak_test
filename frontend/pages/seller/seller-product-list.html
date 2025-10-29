@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>상품 관리 | PREAM</title>
+
+  <!-- Tailwind & Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+
+  <!-- 공통 CSS -->
+  <link rel="stylesheet" href="/frontend/dist/style.css" />
+  
+  <!-- mock 데이터 (먼저 로드) -->
+  <script src="/frontend/js/mockData.js" defer></script>
+
+  <!-- 네비게이션바 생성 스크립트 -->
+  <script src="/frontend/js/navigation.js" defer></script>
+
+  <!-- 관리 전용 JS -->
+  <script src="/frontend/js/seller/seller-product-list.js" defer></script>
+</head>
+<body class="bg-white text-slate-800">
+  <!-- 네비게이션 -->
+  <div id="navigation" data-src="/frontend/components/navigation.html"></div>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+    <!-- 제목 + 중앙 수평선 -->
+    <h1 class="text-[28px] font-extrabold tracking-tight text-center">
+      상품 관리
+    </h1>
+    <hr class="w-24 mx-auto mt-3 mb-6 border-slate-400"/>
+
+    <!-- 상품 리스트 헤더 -->
+    <div class="grid grid-cols-[1fr_96px_120px_2.75fr_auto] gap-4 items-center px-2 sm:px-3 py-2
+                text-sm font-semibold text-slate-700">
+      <div class="text-center">상품 이름</div>
+
+      <!-- 사진 -->
+      <div class="flex items-center justify-center">
+        <span class="inline-block w-24 text-center">사진</span>
+      </div>
+
+      <!-- 가격 -->
+      <div class="flex items-center justify-center">
+        <span class="inline-block w-[120px] text-center">가격</span>
+      </div>
+
+      <div class="flex items-center justify-start">상품 설명</div>
+      <div></div>
+    </div>
+    <hr class="mb-2 border-slate-200"/>
+
+    <!-- 리스트 -->
+    <div id="productList"></div>
+
+    <!-- 비어있을 때 -->
+    <p id="emptyState" class="hidden mt-10 text-center text-slate-500">
+      판매하고 있는 상품이 없습니다.
+    </p>
+  </main>
+</body>
+</html>

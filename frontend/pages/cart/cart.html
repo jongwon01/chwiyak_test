@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>명품 거래 - 장바구니</title>
+  <link rel="stylesheet" href="../../dist/style2.css" />
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-900">
+  <header class="bg-white border-b border-gray-200 p-4">
+    <div class="container mx-auto relative max-w-6xl">
+      <button onclick="history.back()" class="absolute left-4 text-2xl">←</button>
+      <h1 class="text-xl font-bold text-center">장바구니</h1>
+    </div>
+  </header>
+  
+  <main class="container mx-auto px-4 py-6 max-w-6xl">
+      
+      <div class="bg-white rounded-lg p-4 mb-3 flex items-center justify-between shadow-sm">
+        <label class="flex items-center cursor-pointer">
+          <input type="checkbox" id="select-all" class="w-5 h-5 mr-3" />
+          <span class="font-medium">전체 선택</span>
+        </label>
+        <button id="select-delete-btn" class="px-4 py-2 border border-gray-300 rounded text-sm hover:bg-gray-50 transition">
+          선택 삭제
+        </button>
+      </div>
+
+      <div id="cart-items-container" class="space-y-3">
+          <div id="loading-indicator" class="text-center py-12 bg-white rounded-lg shadow-sm">
+              <p class="text-gray-500">장바구니를 불러오는 중...</p>
+          </div>
+          <div id="empty-cart-message" class="text-center py-20 bg-white rounded-lg shadow-sm hidden">
+              <p class="text-gray-500 mb-4">장바구니가 비어있습니다.</p>
+              <a href="/frontend/pages/main.html" class="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition">
+                  쇼핑 계속하기
+              </a>
+          </div>
+      </div>
+
+      <div class="bg-white rounded-lg p-6 my-3 shadow-sm">
+        <h3 class="font-bold text-base mb-4">선택 주문정보</h3>
+        <div class="space-y-2 text-base mb-4">
+          <div class="flex justify-between">
+            <span class="text-gray-600">구매가</span>
+            <span class="font-medium text-gray-900" id="total-price">0원</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600">배송비</span>
+            <span class="font-medium text-gray-900" id="total-delivery">0원</span>
+          </div>
+        </div>
+        <div class="border-t border-gray-200 pt-4 flex justify-between font-bold text-base">
+          <span>총 예상 결제금액</span>
+          <span id="final-total">0원</span>
+        </div>
+      </div>
+
+      <button class="w-full bg-red-500 text-white py-4 text-lg font-bold hover:bg-red-600 transition shadow-md" id="order-checkout-button">
+        0원 • 총 0건 주문하기
+      </button>
+
+  </main>
+
+  <!-- 옵션 변경 모달 (신발용 - 사이즈 + 수량) -->
+  <div id="option-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-xl">
+      <!-- 모달 헤더 -->
+      <div class="border-b border-gray-200 p-4 relative">
+        <button id="modal-close" class="absolute left-4 text-2xl">←</button>
+        <h2 class="text-xl font-bold text-center">옵션 변경</h2>
+      </div>
+
+      <!-- 모달 내용 -->
+      <div class="p-6 space-y-4">
+        <!-- 사이즈 선택 (신발만) -->
+        <div id="size-selection">
+          <h3 class="font-semibold mb-3">사이즈</h3>
+          <div class="space-y-2">
+            <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+              <input type="radio" name="size" value="230" class="w-5 h-5 mr-3" />
+              <span>230</span>
+            </label>
+            <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+              <input type="radio" name="size" value="240" class="w-5 h-5 mr-3" />
+              <span>240</span>
+            </label>
+            <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+              <input type="radio" name="size" value="250" class="w-5 h-5 mr-3" />
+              <span>250</span>
+            </label>
+            <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+              <input type="radio" name="size" value="260" class="w-5 h-5 mr-3" />
+              <span>260</span>
+            </label>
+            <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+              <input type="radio" name="size" value="270" class="w-5 h-5 mr-3" />
+              <span>270</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 수량 선택 -->
+        <div>
+          <h3 class="font-semibold mb-3">수량</h3>
+          <div class="flex items-center justify-center gap-4">
+            <button id="qty-minus" class="w-10 h-10 border border-gray-300 rounded-lg hover:bg-gray-50 text-xl">-</button>
+            <span id="qty-display" class="text-xl font-bold w-12 text-center">1</span>
+            <button id="qty-plus" class="w-10 h-10 border border-gray-300 rounded-lg hover:bg-gray-50 text-xl">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 모달 확인 버튼 -->
+      <div class="p-4">
+        <button id="modal-confirm" class="w-full bg-gray-900 text-white py-4 rounded-lg text-lg font-bold hover:bg-gray-700 transition">
+          확인
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/cart.js"></script>
+</body>
+</html>

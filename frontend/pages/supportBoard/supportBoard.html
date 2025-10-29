@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>문의사항</title>
+
+  <!-- 공통 CSS -->
+  <link rel="stylesheet" href="/frontend/dist/style.css" />
+
+  <!-- lucide 아이콘 CDN -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+
+  <!-- 네비게이션바 생성 스크립트 -->
+  <script src="/frontend/js/navigation.js" defer></script>
+
+</head>
+<body class="min-h-screen bg-white text-gray-900">
+  
+  <!-- 네비게이션바 -->
+  <div id="navigation" data-src="/frontend/components/navigation.html"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-10 bg-white">
+    <h1 class="text-3xl font-bold text-center">문의사항</h1>
+    <!-- 수평선: 조금 더 굵게 -->
+    <div class="border-b-2 border-gray-400 mt-6"></div>
+
+    <!-- 리스트 컨테이너-->
+    <section class="mt-6 bg-white rounded-2xl">
+      <!-- 헤더 행, 헤더는 중앙 정렬) -->
+      <div class="grid grid-cols-[64px_1fr_140px_160px] text-sm text-gray-600 px-2 sm:px-4 py-2">
+        <div class="text-center">No</div>
+        <div class="text-center">문의 제목</div>
+        <div class="text-center">글쓴이</div>
+        <div class="text-center">작성시간</div>
+      </div>
+
+      <!-- 글 리스트 -->
+      <ul id="qna-list" class="bg-white rounded-xl shadow-sm overflow-hidden divide-y divide-gray-200">
+        <li id="qna-loading" class="px-2 sm:px-4 py-6">
+          <div class="animate-pulse h-4 bg-gray-200 rounded w-1/3 mb-3"></div>
+          <div class="animate-pulse h-4 bg-gray-200 rounded w-2/3"></div>
+        </li>
+      </ul>
+
+      <!-- 글쓰기 버튼  -->
+      <div class="mt-4 flex justify-end">
+        <a href="/frontend/pages/supportBoard/supportBoardWrite.html"
+           class="inline-flex items-center rounded-xl px-5 py-2.5 bg-gray-800 text-white shadow hover:bg-gray-900 active:scale-95 transition">
+          문의 작성
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/frontend/js/supportBoard/supportBoard.js"></script>
+</body>
+</html>
